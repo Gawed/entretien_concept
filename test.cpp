@@ -37,14 +37,14 @@ void loop() {
 
     // FFT 处理（示例，假设采样 128 次）
     for (int i = 0; i < SAMPLES; i++) {
-        vReal[i] = event.acceleration.x; // 这里只用 X 轴，实际可用多轴
+        vReal[i] = event.acceleration.x; // X 轴
         vImag[i] = 0;
     }
     FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
     FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
     FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
     
-    // 打印 FFT 结果（示例）
+    // FFT 结果
     for (int i = 0; i < SAMPLES / 2; i++) {
         Serial.print("Freq "); Serial.print(i);
         Serial.print(": "); Serial.println(vReal[i]);
